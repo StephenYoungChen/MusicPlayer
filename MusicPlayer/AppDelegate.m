@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "MPListTableVC.h"
+#import "ViewController.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +18,19 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    //创建tabbar
+    self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    UITabBarController *tabbar = [[UITabBarController alloc]init];
+    self.window.rootViewController = tabbar;
+    ViewController *homeVC = [[ViewController alloc]init];
+    UINavigationController *navHome = [[UINavigationController alloc]initWithRootViewController:homeVC];
+    navHome.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"首页" image:[UIImage imageNamed:@"home"] selectedImage:[UIImage imageNamed:@"home-select"]];
+    MPListTableVC *listVC = [[MPListTableVC alloc]init];
+    UINavigationController *navList = [[UINavigationController alloc]initWithRootViewController:listVC];
+    navList.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"列表" image:[UIImage imageNamed:@"me"] selectedImage:[UIImage imageNamed:@"me-select"]];
+    tabbar.viewControllers = @[navHome,navList];
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
